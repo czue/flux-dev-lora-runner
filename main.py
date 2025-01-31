@@ -19,16 +19,6 @@ def get_input(prompt, model=DEFAULT_MODEL, count=DEFAULT_COUNT):
         "num_outputs": count
     }
 
-def slugify(text):
-        # Convert to lowercase and replace spaces with hyphens
-        text = text.lower().strip()
-        # Remove special characters and replace spaces with hyphens
-        result = ""
-        for char in text:
-            if char.isalnum() or char in [' ', '-']:
-                result += char
-        return '-'.join(result.split())
-
 
 def main():
     parser = argparse.ArgumentParser()
@@ -45,11 +35,15 @@ def main():
         input=input
     )
     import os
+    import re
 
     output_dir = "output"
     os.makedirs(output_dir, exist_ok=True)
 
-    prompt_slug = slugify(args.prompt.split(" ")[-2:])[:20]
+    # Remove special characters and convert to lowercase for the slug
+    prompt_slug = "-".join(args.prompt.split(" ")[-3:])
+    prompt_slug = re.sub(r'[^a-zA-Z0-9\-]', '', prompt_slug).lower()
+
     for index, item in enumerate(output):
         file_id = uuid.uuid4().hex[:5]
         output_path = os.path.join(output_dir, f"{prompt_slug}-{file_id}.webp")
