@@ -1,3 +1,9 @@
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "replicate",
+# ]
+# ///
 import uuid
 import replicate
 import argparse
