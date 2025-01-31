@@ -4,9 +4,11 @@
 #     "replicate",
 # ]
 # ///
-import uuid
-import replicate
 import argparse
+import os
+import re
+import replicate
+import uuid
 
 DEFAULT_MODEL = "czue/me-v1"
 DEFAULT_COUNT = 1
@@ -34,8 +36,6 @@ def main():
         "lucataco/flux-dev-lora:091495765fa5ef2725a175a57b276ec30dc9d39c22d30410f2ede68a3eab66b3",
         input=input
     )
-    import os
-    import re
 
     output_dir = "output"
     os.makedirs(output_dir, exist_ok=True)
