@@ -10,7 +10,7 @@ See [this blog post](https://www.coryzue.com/writing/train-ai-on-your-face/) for
 ```
 uv run main.py "writing a blog post" \
  --model="czue/me-v1" \
- --token=CZUE \
+ --trigger=CZUE \
  --extra_context="a 40 year old man"\
  --count=4
 ```
