@@ -9,13 +9,13 @@ import replicate
 import argparse
 
 DEFAULT_MODEL = "czue/me-v1"
-DEFAULT_TOKEN = "CZUE"
+DEFAULT_TRIGGER = "CZUE"
 DEFAULT_EXTRA_CONTEXT = ""
 DEFAULT_COUNT = 1
 
 
-def get_input(prompt, model=DEFAULT_MODEL, token=DEFAULT_TOKEN, additional_context=DEFAULT_EXTRA_CONTEXT, count=DEFAULT_COUNT):
-    formatted_prefix = f"A photo of {token}{', ' + additional_context if additional_context else ''}"
+def get_input(prompt, model=DEFAULT_MODEL, trigger=DEFAULT_TRIGGER, additional_context=DEFAULT_EXTRA_CONTEXT, count=DEFAULT_COUNT):
+    formatted_prefix = f"A photo of {trigger}{', ' + additional_context if additional_context else ''}"
     return {
         "prompt": f"{formatted_prefix}, {prompt}",
         "hf_lora": model,
@@ -40,13 +40,13 @@ def main():
                       help="Model to use (default: %(default)s)")
     parser.add_argument("--extra_context", default=DEFAULT_EXTRA_CONTEXT,
                       help="Prefix template for the prompt (default: %(default)s)")
-    parser.add_argument("--token", default=DEFAULT_TOKEN,
-                      help="Token to use in prefix (default: %(default)s)")
+    parser.add_argument("--trigger", default=DEFAULT_TRIGGER,
+                      help="Trigger word to use in prefix (default: %(default)s)")
     parser.add_argument("--count", default=DEFAULT_COUNT,
                       help="Number of photos to generate (default: %(default)s)", type=int)
     args = parser.parse_args()
 
-    input = get_input(args.prompt, args.model, args.token, args.extra_context, args.count)
+    input = get_input(args.prompt, args.model, args.trigger, args.extra_context, args.count)
     output = replicate.run(
         "lucataco/flux-dev-lora:091495765fa5ef2725a175a57b276ec30dc9d39c22d30410f2ede68a3eab66b3",
         input=input
