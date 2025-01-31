@@ -8,8 +8,16 @@ See [this blog post](https://www.coryzue.com/writing/train-ai-on-your-face/) for
 ## Usage
 
 ```
-uv run main.py --model="czue/me-v1" --token=CZUE --extra_context="a 40 year old man" --count=4 "writing a blog post"
+uv run main.py "writing a blog post" \
+ --model="czue/me-v1" \
+ --token=CZUE \
+ --extra_context="a 40 year old man"\
+ --count=4
 ```
 
+Explanation of additional arguments:
 
-
+- **model**: The hugging face model to use (repo id)
+- **trigger**: The trigger word you used when training your model.
+- **extra_context**: Any extra context to provide.
+- **count**: The number of photos to generate
