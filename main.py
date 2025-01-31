@@ -1,3 +1,4 @@
+import uuid
 import replicate
 
 
@@ -5,7 +6,7 @@ import argparse
 
 def get_input(detail):
     return {
-        "prompt": f"a photo of CZUE, a 40-year-old man, {detail}",
+        "prompt": f"a photo of CZUE, a 35-year-old man, {detail}",
         "hf_lora": "czue/me-v1"
     }
 
@@ -20,9 +21,8 @@ def main():
         input=input
     )
     for index, item in enumerate(output):
-        with open(f"output_{index}.webp", "wb") as file:
+        with open(f"output_{uuid.uuid4().hex}.webp", "wb") as file:
             file.write(item.read())
-
 
 if __name__ == "__main__":
     main()
